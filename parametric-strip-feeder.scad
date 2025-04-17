@@ -1,14 +1,24 @@
+/////////////////////////////////////////////////////////////////////
+//                            CC Atribution                        //
+/////////////////////////////////////////////////////////////////////
+// by: Jacob Christ @ pontech.com
+/////////////////////////////////////////////////////////////////////
 echo(version=version());
 
 base_length_mm = 90; // Opulo standard strip feeder length = 120mm
-Qty8mm = 22;
-Qty12mm = 0;
-Qty16mm = 0;
 
+// Set the next Qty8mm, Qty12mm, and Qty16mm to an integer number of strips
+Qty8mm = 7;
+Qty12mm = 2;
+Qty16mm = 2;
+
+// screw_offset_mm adjusts the screw center in the base (left to right)
 screw_offset_mm = -4.5;
 
+// ear_ parameters allow for adding an addition ear to the feeder
 ear_8mm_side_mm = 0;
 ear_16mm_side_mm = 0;
+
 
 base_height_mm = 2;
 
@@ -128,6 +138,7 @@ color("gray")
 
     }
 
+// Uncomment the following line to render the screw hole cutting tool
 //screw_hole_cutter_array();
 
 

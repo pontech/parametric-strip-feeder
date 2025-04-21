@@ -8,9 +8,9 @@ echo(version=version());
 base_length_mm = 90; // Opulo standard strip feeder length = 120mm
 
 // Set the next Qty8mm, Qty12mm, and Qty16mm to an integer number of strips
-Qty8mm = 7;
-Qty12mm = 2;
-Qty16mm = 2;
+Qty8mm = 0;
+Qty12mm = 0;
+Qty16mm = 9;
 
 // screw_offset_mm adjusts the screw center in the base (left to right)
 screw_offset_mm = -4.5;
@@ -94,9 +94,10 @@ module screw_hole_cutter_array() {
         for(w = [0: 15: base_width_mm])
             for(l = [-base_length_mm/2: 15: base_length_mm/2])
                 translate([w, -0.1, l])
-                    if(w % 45 == 0)
-                        screw_hole_cutter(true);
-                    else
+                    //if(w % 45 == 0)
+                    //if(w == 7 * 15)
+                    //    screw_hole_cutter(true);
+                    //else
                         screw_hole_cutter(false);
 }
 

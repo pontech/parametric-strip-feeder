@@ -11,20 +11,20 @@ pocket_to_pocket_mm = 1; // spacking between different pockets
 
 // width, length, depth
 pockets = [
-    [10.5,  7.8, 4.55 + 0.1], // OLP-000049 - 6-SMD DIP
-    [8.75,  6.2, 1.75 + 0.1], // OLp-000055 - 14-SOIC
-    [ 5.1,  6.2, 1.75 + 0.1], // OLp-000055 - 8-SOIC
+    [10.5 + 0.1,  7.8 + 0.1, 4.55 + 0.1], // OLP-000049 - 6-SMD DIP
+    [8.75 + 0.1,  6.2 + 0.1, 1.75 + 0.1], // OLP-000055 - 14-SOIC
+    [ 5.1 + 0.1,  6.2 + 0.1, 1.75 + 0.1], // OLP-0000?? - 8-SOIC
 ];
 
-
-pocket = pockets[2];
+// The index below selects the pocket from above
+pocket = pockets[0];
 wall_width_mm = 1.2;
 
 
 // === Dovetail Profile (2D)
-module dovetail_profile(dovetail_angle =  45,     // Degrees
-                        dovetail_depth =   1,     // Vertical height
-                        dovetail_width = 0.5,     // Bottom (narrow) width
+module dovetail_profile(dovetail_angle,     // Degrees
+                        dovetail_depth,     // Vertical height
+                        dovetail_width,     // Bottom (narrow) width
                         ) {
     // How much wider top is than bottom
     half_top_extra = dovetail_depth * tan(dovetail_angle);  
@@ -39,12 +39,12 @@ module dovetail_profile(dovetail_angle =  45,     // Degrees
 
 // === Dovetail Slot
 module dovetail(dovetail_length_mm = 12,
-                dovetail_angle = 45,      // Degrees
+                dovetail_angle = 90-55,      // Degrees
                 dovetail_depth = 1.6,       // Vertical height
-                dovetail_width = 0.5,      // Bottom (narrow) width
+                dovetail_width = 1.55,      // Bottom (narrow) width
             ) {
     
-    translate([-dovetail_width/2,dovetail_length_mm,-0.1])
+    translate([-dovetail_width/2,dovetail_length_mm,-0.001])
     rotate([90,0,0])
         linear_extrude(height = dovetail_length_mm)
             dovetail_profile(dovetail_angle,dovetail_depth,dovetail_width);
@@ -87,8 +87,10 @@ if(render_tray == true){
             // tray body
             translate([-carrier_width_mm/2,-0.1, 0])
                 cube([carrier_width_mm, carrier_length_mm, carrier_height_mm]);
+            
             // tray walls
             translate([0,0,carrier_height_mm]){
+                
                 translate([-carrier_width_mm/2 + wall_width_mm/2,0,0])
                     translate([-wall_width_mm/2,0,0])
                         cube([wall_width_mm,carrier_length_mm, 2]);
@@ -101,7 +103,7 @@ if(render_tray == true){
 
         // Menlu Keyway Cutouts
         color("blue")
-        translate([0,2,0]){
+        translate([0,0,0]){
             translate([0, 0,0])
                 menlu_dovetail();
             translate([0, 82,0])
